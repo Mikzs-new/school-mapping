@@ -3,8 +3,12 @@ FROM python:3.12
 ENV PYTHONDOWNWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /school_map
-COPY requirements.txt /school_map/
+WORKDIR /app
+COPY school_map/requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY . /school_map/
+COPY . .
+
+EXPOSE 8000
+
+CMD ["python","school_map/manage.py","runserver","0.0.0.0:8000"]
